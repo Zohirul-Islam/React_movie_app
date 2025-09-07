@@ -1,29 +1,37 @@
-import {  Link, NavLink, useNavigate } from "react-router-dom";
+import {  href, Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import userIcon from "../assets/user.png";
 import { IoSearch } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { IoMdHome } from "react-icons/io";
 import { PiTelevisionFill } from "react-icons/pi";
- export const navigation = [
+import { BiSolidMoviePlay } from "react-icons/bi";
+export const navigation = [
     {
       label: "TV Shows",
       href: "tv",
-      icon:<PiTelevisionFill />
+      icon:<PiTelevisionFill/>
     },
     {
       label: "Movies",
       href: "movie",
+      icon:<BiSolidMoviePlay/>
     },
   ];
 export const mobileNavigation = [
-  ...navigation,
-  {
+    {
     label:"Home",
     href:'/',
-    icon:<IoMdHome />
+    icon:<IoMdHome/>
+  },
+  ...navigation,
+  {
+    label:'search',
+    href:'search',
+    icon:<IoSearch/>
   }
 ]
+
 const Header = () => {
   const navigate = useNavigate()
   const [search,setSearch] = useState('')
@@ -32,7 +40,10 @@ const Header = () => {
     e.preventDefault()
   }
   useEffect(()=>{
-    navigate(`/search?q=${search}`)
+    if(search){
+      navigate(`/search?q=${search}`)
+    }
+    
   },[search])
   return (
     <header className="fixed top-0  w-full h-16 bg-neutral-600 opacity-75">
