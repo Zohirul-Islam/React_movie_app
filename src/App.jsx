@@ -33,9 +33,9 @@ useEffect(()=>{
   fetchConfigaration()
 },[])
   return (
-    <main>
+    <main className='min-h-screen'>
       <Header/>
-      <div className='pt-16'>
+      <div className=''>
         <Outlet/>
       </div>
       <Footer/>
