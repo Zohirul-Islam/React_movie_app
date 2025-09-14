@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const Card = ({data,index,trending}) => {
     const imgUrl = useSelector((state) => state.movieData.imageUrl);
   return (
-    <Link to={'/'+data.media_type+data.id} className='w-full max-w-[230px] min-w-[235px] h-80 overflow-hidden rounded-lg relative'>
+    <Link to={'/'+data.media_type+data.id} className='w-full max-w-[230px] min-w-[235px] h-80 overflow-hidden block hover:scale-105 transition-all rounded-lg relative'>
         <img src={imgUrl + data?.poster_path} alt="" />
         <div className='absolute top-4'>
             {

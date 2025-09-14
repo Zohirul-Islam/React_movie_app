@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import Card from "../components/Card";
 
 
 const Explore = () => {
@@ -24,11 +25,30 @@ const Explore = () => {
       console.log("error",error.message)
     }
   }
+  const handleScroll =()=>{
+    if((window.innerHeight + window.scrollY)>=document.body.offsetHeight){
+      setPageNo((prev)=>prev+1)
+    }
+  }
   useEffect(()=>{
     fetchData()
+  },[pageNo])
+  useEffect(()=>{
+    window.addEventListener('scroll',handleScroll)
   },[])
   return (
-    <div>Explore</div>
+    <div className="pt-16">
+      <div className="container">
+        <h3 className="capitalize text-lg lg:text-2xl font-semibold my-3">Popular {params.explore} Shows</h3>
+        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6">
+          {
+            data.map((exploreData,index)=>(
+              <Card data={exploreData} key={exploreData.id +"explore"}/>
+            ))
+          }
+        </div>
+      </div>
+    </div>
   )
 }
 
