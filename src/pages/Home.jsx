@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import BannerHome from "../components/BannerHome";
 import Horizontalcard from "../components/Horizontalcard";
-import { useEffect, useState } from "react";
 
 import useFetch from "../hooks/useFetch";
 const Home = () => {
