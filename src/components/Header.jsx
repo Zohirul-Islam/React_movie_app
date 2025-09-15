@@ -1,4 +1,4 @@
-import {  href, Link, NavLink, useNavigate } from "react-router-dom";
+import {  href, Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import userIcon from "../assets/user.png";
 import { IoSearch } from "react-icons/io5";
@@ -33,8 +33,11 @@ export const mobileNavigation = [
 ]
 
 const Header = () => {
+  const location = useLocation()
+  const removeSpace = location?.search?.slice(3)?.split('%20')?.join(" ")
+  const [search,setSearch] = useState(removeSpace)
   const navigate = useNavigate()
-  const [search,setSearch] = useState('')
+  
 
   const onSubmitHandler =(e)=>{
     e.preventDefault()

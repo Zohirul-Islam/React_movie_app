@@ -12,11 +12,11 @@ const Home = () => {
   return (
     <div>
       <BannerHome />
-      <Horizontalcard data={trendingdData} heading={"Trending Show"} />
-      <Horizontalcard data={nowPlayingData} heading={"Playing Now"} />
-      <Horizontalcard data={topRated} heading={"Top Rated"} />
-      <Horizontalcard data={popular} heading={"Popular Tv Series"} />
-      <Horizontalcard data={onAirData} heading={"On The Air"} />
+      <Horizontalcard data={trendingdData} heading={"Trending Show"}  />
+      <Horizontalcard data={nowPlayingData} heading={"Playing Now"} media_type ={"movie"} />
+      <Horizontalcard data={topRated} heading={"Top Rated"} media_type ={"movie"}/>
+      <Horizontalcard data={popular} heading={"Popular Tv Series"} media_type ={"tv"} />
+      <Horizontalcard data={onAirData} heading={"On The Air"} media_type ={"tv"}/>
     </div>
   );
 };

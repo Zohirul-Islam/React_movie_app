@@ -35,7 +35,7 @@ useEffect(()=>{
   return (
     <main className='min-h-screen'>
       <Header/>
-      <div className=''>
+      <div className='min-h-[90vh]'>
         <Outlet/>
       </div>
       <Footer/>

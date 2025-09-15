@@ -34,16 +34,21 @@ const Explore = () => {
     fetchData()
   },[pageNo])
   useEffect(()=>{
+    setPageNo(1)
+    setData([])
+    fetchData()
+  },[params.explore])
+  useEffect(()=>{
     window.addEventListener('scroll',handleScroll)
   },[])
   return (
-    <div className="pt-16">
+    <div className="py-16">
       <div className="container">
         <h3 className="capitalize text-lg lg:text-2xl font-semibold my-3">Popular {params.explore} Shows</h3>
-        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6">
+        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center lg:justify-start">
           {
             data.map((exploreData,index)=>(
-              <Card data={exploreData} key={exploreData.id +"explore"}/>
+              <Card data={exploreData} key={exploreData.id +"explore"} media_type ={params.explore}/>
             ))
           }
         </div>

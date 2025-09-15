@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Card from "./Card";
 import { ChevronLeft, ChevronRight } from "lucide-react"; 
 
-const Horizontalcard = ({ data = [], heading }) => {
+const Horizontalcard = ({ data = [], heading,media_type }) => {
   const containerRef = useRef();
 
   const scrollLeft = () => {
@@ -24,7 +24,7 @@ const Horizontalcard = ({ data = [], heading }) => {
           className="grid grid-cols-[repeat(auto-fit,235px)] gap-7 grid-flow-col no-scrollbar overflow-y-hidden scrollbar-hide"
         >
           {data.map((item,index) => (
-            <Card key={item.id} data={item} trending={true} index={index+1}/>
+            <Card key={item.id} data={item} trending={true} index={index+1} media_type ={media_type}/>
           ))}
         </div>
 
