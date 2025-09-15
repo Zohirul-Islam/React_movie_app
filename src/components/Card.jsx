@@ -5,7 +5,7 @@ const Card = ({data,index,trending,media_type}) => {
     const imgUrl = useSelector((state) => state.movieData.imageUrl);
     const mediaType = data.media_type ?? media_type
   return (
-    <Link to={'/'+mediaType+data.id} className='w-full max-w-[230px] min-w-[235px] h-80 overflow-hidden block hover:scale-105 transition-all rounded-lg relative'>
+    <Link to={`/${media_type}/${data.id}`} className='w-full max-w-[230px] min-w-[235px] h-80 overflow-hidden block hover:scale-105 transition-all rounded-lg relative'>
         <img src={imgUrl + data?.poster_path} alt="" />
         <div className='absolute top-4'>
             {

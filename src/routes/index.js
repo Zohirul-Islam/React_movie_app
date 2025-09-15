@@ -15,8 +15,9 @@ const router = createBrowserRouter([
                 Component:Home
             },
             {
-                Component:Explore,
-                path:':explore'
+                path:':explore',
+                Component:Explore
+                
             },
             {
                 path:':explore/:id',

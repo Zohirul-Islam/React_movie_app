@@ -25,21 +25,25 @@ const Explore = () => {
       console.log("error",error.message)
     }
   }
-  const handleScroll =()=>{
-    if((window.innerHeight + window.scrollY)>=document.body.offsetHeight){
-      setPageNo((prev)=>prev+1)
-    }
+const handleScroll = () => {
+  if (
+    (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50 &&
+    pageNo < totalPage
+  ) {
+    setPageNo((prev) => prev + 1);
   }
+};
+
   useEffect(()=>{
     fetchData()
   },[pageNo])
   useEffect(()=>{
     setPageNo(1)
     setData([])
-    fetchData()
   },[params.explore])
   useEffect(()=>{
-    window.addEventListener('scroll',handleScroll)
+    window.addEventListener('scroll',handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   },[])
   return (
     <div className="py-16">
@@ -48,7 +52,7 @@ const Explore = () => {
         <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center lg:justify-start">
           {
             data.map((exploreData,index)=>(
-              <Card data={exploreData} key={exploreData.id +"explore"} media_type ={params.explore}/>
+              <Card data={exploreData} key={`${exploreData.id}_${index}_explore`}  media_type ={params.explore}/>
             ))
           }
         </div>
