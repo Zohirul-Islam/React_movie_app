@@ -9,7 +9,7 @@ const useFetchDetails =(endpoint)=>{
       const response = await axios.get(endpoint);
       setLoading(false)
       setData(response.data)
-      console.log("playingdata",response.data.results)
+      
       } catch (error) {
         console.log(error)
       }

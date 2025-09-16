@@ -1,17 +1,19 @@
 import { useParams } from "react-router-dom";
 import useFetchDetails from "../hooks/useFetchDetails";
 import { useSelector } from "react-redux";
+import Divider from "../components/Divider";
 
 const Details = () => {
   const params = useParams();
   const imgUrl = useSelector((state) => state.movieData.imageUrl);
-  console.log(params);
+  
   const { data } = useFetchDetails(`/${params?.explore}/${params?.id}`);
   const { data: castData } = useFetchDetails(
     `/${params?.explore}/${params?.id}/credits`
   );
-  console.log("data", data);
-  console.log("star cast", castData);
+  const test1 = castData?.crew?.filter((el)=>el?.job === "Writer")
+  const test2 = test1?.map((el)=>el?.name)
+  console.log(test2.join(' , '))
 
   return (
     <div>
@@ -38,21 +40,29 @@ const Details = () => {
             {data?.title || data?.name}
           </h2>
           <p className="text-neutral-400 text-lg">{data?.tagline}</p>
+          <Divider/>
           <div className="flex items-center my-3 gap-3">
             <p>Rating: {Number(data?.vote_average).toFixed(1)}</p>
             <p>View: {Number(data?.vote_count)}</p>
             <p></p>
           </div>
+          <Divider/>
           <div>
             <h3 className="text-xl font-bold text-white my-1">Overview</h3>
             <p className="max-w-2xl">{data?.overview}</p>
-            <div>
-              <p className="font-bold capitalize text-2xl">status: <span className="text-xl">{data?.status}</span></p>
+            <Divider/>
+            <div className="flex items-center gap-4 my-4">
+              <p className="">Status: <span className="text-xl">{data?.status}</span></p>
               <span>|</span>
               <p>Release Date: {data?.release_date}</p>
               <span>|</span>
               <p>Revenue: {data?.release_date}</p>
             </div>
+            <Divider/>
+          </div>
+          <div>
+            <p><span className="text-white">Director</span>: {castData?.crew[0]?.name}</p>
+            <p><span className="text-white">Writer</span>: {}</p>
           </div>
         </div>
       </div>
