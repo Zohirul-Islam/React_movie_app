@@ -15,7 +15,7 @@ const Horizontalcard = ({ data = [], heading,media_type }) => {
 
   return (
     <div className="w-full my-40 container">
-      <h2 className="text-xl sm:text-2xl font-bold my-4">{heading}</h2>
+      <h2 className="text-xl sm:text-2xl font-bold my-4 capitalize ">{heading}</h2>
 
       <div className="relative overflow-hidden">
         {/* Scrollable cards */}

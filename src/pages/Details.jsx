@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import useFetchDetails from "../hooks/useFetchDetails";
 import { useSelector } from "react-redux";
 import Divider from "../components/Divider";
+import useFetch from "../hooks/useFetch";
+import Horizontalcard from "../components/Horizontalcard";
 
 const Details = () => {
   const params = useParams();
@@ -11,9 +13,8 @@ const Details = () => {
   const { data: castData } = useFetchDetails(
     `/${params?.explore}/${params?.id}/credits`
   );
-  const test1 = castData?.crew?.filter((el)=>el?.job === "Writer")
-  const test2 = test1?.map((el)=>el?.name)
-  console.log(test2.join(' , '))
+  const {data:similarData} = useFetch(`/${params?.explore}/${params?.id}/similar`)
+  const {data:recomendationData} = useFetch(`/${params?.explore}/${params?.id}/recommendations`)
 
   return (
     <div>
@@ -27,7 +28,7 @@ const Details = () => {
         </div>
         <div className="absolute w-full h-full top-0 bg-gradient-to-t from-neutral-900/90 to-transparent"></div>
       </div>
-      <div className="container px-3 py-16 lg:py-0 flex flex-col lg:flex-row gap-10">
+      <div className="container px-3 py-0 sm:py-16 flex flex-col lg:flex-row gap-10">
         <div className=" relative mx-auto mt-15 lg:-mt-28 lg:mx-0 w-fit">
           <img
             className="h-full w-full sm:h-120 sm:w-80 object-cover rounded"
@@ -62,9 +63,31 @@ const Details = () => {
           </div>
           <div>
             <p><span className="text-white">Director</span>: {castData?.crew[0]?.name}</p>
-            <p><span className="text-white">Writer</span>: {}</p>
+          </div>
+          <Divider/>
+          <h2 className="font-bold text-lg my-2">Cast: </h2>
+          <div className="grid grid-cols-[repeat(auto-fit,96px)] gap-5">
+            {
+              castData?.cast?.filter(el=>el?.profile_path).map((cast,index)=>{
+                return (
+                  <div>
+                      <div>
+                          <img className="w-24 h-24 object-cover rounded-full" src={imgUrl + cast?.profile_path} alt="" />
+                      </div>
+                      <p className="font-bold text-center text-sm text-neutral-400">{cast?.original_name}</p>
+                  </div>
+                )
+              })
+             
+            }
           </div>
         </div>
+        
+
+      </div>
+      <div>
+        <Horizontalcard data={similarData} heading={"Similar " + params?.explore} media_type={params?.explore}/>
+        <Horizontalcard data={recomendationData} heading={"recomendation " + params?.explore} media_type={params?.explore}/>
       </div>
     </div>
   );
