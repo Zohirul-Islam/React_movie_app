@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import Divider from "../components/Divider";
 import useFetch from "../hooks/useFetch";
 import Horizontalcard from "../components/Horizontalcard";
+import { useState } from "react";
+import VideoPlay from "../components/VideoPlay";
 
 const Details = () => {
   const params = useParams();
@@ -15,6 +17,12 @@ const Details = () => {
   );
   const {data:similarData} = useFetch(`/${params?.explore}/${params?.id}/similar`)
   const {data:recomendationData} = useFetch(`/${params?.explore}/${params?.id}/recommendations`)
+  const [playVideo,setPlayVideo] = useState(false);
+  const [playVideoId,setPlayVideoId] = useState('');
+  const handlePlayVideo =(data)=>{
+    setPlayVideoId(data);
+    setPlayVideo(true)
+  }
 
   return (
     <div>
@@ -35,6 +43,7 @@ const Details = () => {
             src={imgUrl + data?.poster_path}
             alt=""
           />
+          <button onClick={()=>handlePlayVideo(data)} className="px-4 py-2 w-full mt-3 text-center bg-white text-black rounded font-bold cursor-pointer text-lg hover:bg-amber-700">Play Now</button>
         </div>
         <div>
           <h2 className="text-2xl text-white sm:text-3xl font-bold">
@@ -70,7 +79,7 @@ const Details = () => {
             {
               castData?.cast?.filter(el=>el?.profile_path).map((cast,index)=>{
                 return (
-                  <div>
+                  <div key={index}>
                       <div>
                           <img className="w-24 h-24 object-cover rounded-full" src={imgUrl + cast?.profile_path} alt="" />
                       </div>
@@ -89,6 +98,12 @@ const Details = () => {
         <Horizontalcard data={similarData} heading={"Similar " + params?.explore} media_type={params?.explore}/>
         <Horizontalcard data={recomendationData} heading={"recomendation " + params?.explore} media_type={params?.explore}/>
       </div>
+      {
+        playVideo && (
+            <VideoPlay media_type ={params?.explore} data ={playVideoId} close ={()=>setPlayVideo(false)}/>
+        )
+      }
+      
     </div>
   );
 };
